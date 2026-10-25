@@ -1,0 +1,11 @@
+/.env.*.local
+
+/.local/
+/.npm/
+
+.bash_history
+
+.claude.json
+.claude/*
+!.claude/skills/
+!.claude/skills/**
