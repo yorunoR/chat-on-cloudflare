@@ -1,0 +1,23 @@
+x-app: &app
+  user: "${HOST_UID}:${HOST_GID}"
+  networks:
+    - network
+
+services:
+  ai:
+    <<: *app
+    build:
+      context: .
+      dockerfile: containers/ai/local/Dockerfile
+    working_dir: /ai
+    volumes:
+      - .:/ai
+      - /dev/null:/ai/.env.ai.local:ro
+    env_file: .env.ai.local
+    command: /bin/bash -c "
+      bash"
+    tty: true
+    stdin_open: true
+
+networks:
+  network:
