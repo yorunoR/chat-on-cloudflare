@@ -2,6 +2,7 @@
 
 /.local/
 /.npm/
+/.cache/
 
 .bash_history
 
