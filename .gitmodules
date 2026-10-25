@@ -1,0 +1,3 @@
+[submodule "chat-on-hono"]
+	path = chat-on-hono
+	url = https://github.com/yorunoR/chat-on-hono
