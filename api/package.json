@@ -13,7 +13,8 @@
     "db:rollback": "tsx src/scripts/db/rollback.ts",
     "db:status": "tsx src/scripts/db/status.ts",
     "db:studio": "drizzle-kit studio",
-    "db:drop": "drizzle-kit drop"
+    "db:drop": "drizzle-kit drop",
+    "admin:create": "tsx src/scripts/admin/create.ts"
   },
   "dependencies": {
     "@sson0-er/drizzle-admin": "0.1.0",
