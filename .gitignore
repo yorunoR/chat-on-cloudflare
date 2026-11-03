@@ -3,6 +3,7 @@
 /.local/
 /.npm/
 /.cache/
+/.config/
 
 .bash_history
 
