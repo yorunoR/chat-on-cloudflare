@@ -1,8 +1,5 @@
-import { drizzle } from "drizzle-orm/d1"
-import * as schema from "./schema/index.js"
+import { env } from "cloudflare:workers"
+import { createDB } from "./client.js"
 
-export function createDB(d1: D1Database) {
-  return drizzle(d1, { schema })
-}
-
-export type Database = ReturnType<typeof createDB>
+// クライアントを作るだけで、D1 への問い合わせはクエリ実行時 (リクエスト中) に行われる
+export const db = createDB(env.DB)

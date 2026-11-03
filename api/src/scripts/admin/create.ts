@@ -6,7 +6,7 @@ import { createInterface } from "node:readline/promises"
 import { Writable } from "node:stream"
 import { getPlatformProxy } from "wrangler"
 import { hashPassword, PASSWORD_MIN_LENGTH } from "../../admin/password.js"
-import { createDB, type Database } from "../../db/index.js"
+import { createDB, type Database } from "../../db/client.js"
 import { adminUsers } from "../../db/schema/index.js"
 import type { Bindings } from "../../types.js"
 
