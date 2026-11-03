@@ -9,7 +9,7 @@
     "lint:fix": "biome check --write .",
     "type": "tsc --noEmit && tsc --noEmit -p tsconfig.scripts.json",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate api_dev --local",
+    "db:migrate": "wrangler d1 migrations apply DB --local",
     "db:studio": "drizzle-kit studio",
     "db:drop": "drizzle-kit drop"
   },
