@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": [
+    "src/scripts/**/*.ts",
+    "drizzle.config.ts",
+    "worker-configuration.d.ts"
+  ],
+  "exclude": []
+}
