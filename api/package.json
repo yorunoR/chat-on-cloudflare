@@ -21,6 +21,7 @@
     "@biomejs/biome": "2.6.3",
     "@types/node": "^26.6.5",
     "drizzle-kit": "^0.31.11",
+    "typescript": "^7.0.2",
     "wrangler": "^4.110.0"
   }
 }
