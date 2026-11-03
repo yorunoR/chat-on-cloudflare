@@ -1,0 +1,32 @@
+{
+  "name": "api",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --ip 0.0.0.0",
+    "deploy": "wrangler deploy --minify",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "type": "tsc --noEmit && tsc --noEmit -p tsconfig.scripts.json",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "wrangler d1 migrations apply DB --local",
+    "db:rollback": "tsx src/scripts/db/rollback.ts",
+    "db:status": "tsx src/scripts/db/status.ts",
+    "db:studio": "drizzle-kit studio",
+    "db:drop": "drizzle-kit drop",
+    "admin:create": "tsx src/scripts/admin/create.ts"
+  },
+  "dependencies": {
+    "@sson0-er/drizzle-admin": "0.1.0",
+    "drizzle-orm": "^0.45.4",
+    "hono": "^4.13.14"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.3",
+    "@types/node": "^26.6.5",
+    "drizzle-kit": "^0.31.11",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.110.0"
+  }
+}

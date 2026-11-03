@@ -1,0 +1,9 @@
+onlyBuiltDependencies:
+  - esbuild
+  - workerd
+allowBuilds:
+  esbuild: true
+  workerd: true
+minimumReleaseAgeExclude:
+  - hono@4.13.14
+minimumReleaseAge: 10080

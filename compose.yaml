@@ -19,5 +19,22 @@ services:
     tty: true
     stdin_open: true
 
+  api:
+    <<: *app
+    build:
+      context: .
+      dockerfile: containers/api/local/Dockerfile
+    working_dir: /api
+    volumes:
+      - ./api:/api
+    env_file: .env.api.local
+    command: /bin/bash -c "
+      pnpm install;
+      pnpm dev"
+    ports:
+      - "8787:8787"
+    tty: true
+    stdin_open: true
+
 networks:
   network:
