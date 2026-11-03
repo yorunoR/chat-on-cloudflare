@@ -10,11 +10,11 @@
     "type": "tsc --noEmit && tsc --noEmit -p tsconfig.scripts.json",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "wrangler d1 migrations apply DB --local",
-    "db:rollback": "tsx src/scripts/db/rollback.ts",
-    "db:status": "tsx src/scripts/db/status.ts",
+    "db:rollback": "tsx scripts/db/rollback.ts",
+    "db:status": "tsx scripts/db/status.ts",
     "db:studio": "drizzle-kit studio",
     "db:drop": "drizzle-kit drop",
-    "admin:create": "tsx src/scripts/admin/create.ts"
+    "admin:create": "tsx scripts/admin/create.ts"
   },
   "dependencies": {
     "@sson0-er/drizzle-admin": "0.1.0",

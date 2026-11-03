@@ -15,8 +15,8 @@
 
 ### Workers とスクリプトの分離
 
-- `src/` (`src/scripts/` を除く) は Workers で動く。`node:*` を import しない。`tsconfig.json` は Node の型を含めないので `pnpm type` で検出される。
-- `src/scripts/` は Node.js (tsx) で動く運用スクリプト。D1 には `wrangler` の `getPlatformProxy()` で接続し、`createDB(env.DB)` でクライアントを作る。
+- `src/` は Workers で動く。`node:*` を import しない。`tsconfig.json` は Node の型を含めないので `pnpm type` で検出される。
+- `scripts/` は Node.js (tsx) で動く運用スクリプト。D1 には `wrangler` の `getPlatformProxy()` で接続し、`createDB(env.DB)` でクライアントを作る。
 - Workers とスクリプトの両方から使うモジュール (`src/db/client.ts`, `src/db/schema/`, `src/admin/password.ts` など) では `node:*` も `cloudflare:workers` も import しない。`cloudflare:workers` を使ってよいのは Workers 専用のモジュール (`src/db/index.ts`, `src/admin/index.ts` など) だけ。
 - 相対 import には `.js` 拡張子を付ける (tsx で実行するスクリプトと共有するため)。
 
