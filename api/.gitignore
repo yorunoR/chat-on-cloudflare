@@ -35,3 +35,5 @@ lerna-debug.log*
 # local
 /.cache/
 /.local/
+
+/worker-configuration.d.ts
