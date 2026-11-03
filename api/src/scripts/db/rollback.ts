@@ -1,6 +1,3 @@
-// 適用済みのマイグレーションを新しい順に取り消す。
-// drizzle/down/<マイグレーション名>.sql を実行し、d1_migrations から記録を削除する。
-// 使い方: pnpm db:rollback [件数]  (省略時は 1 件)
 // 接続先はローカルの D1。wrangler の env は CLOUDFLARE_ENV で切り替わる
 
 import { existsSync, readFileSync } from "node:fs"
@@ -11,7 +8,7 @@ import type { Bindings } from "../../types.js"
 const DOWN_DIR = join(import.meta.dirname, "../../../drizzle/down")
 const MIGRATIONS_TABLE = "d1_migrations"
 
-/** SQL ファイルを文単位に分割する (drizzle の statement-breakpoint と行末の ; で区切る) */
+// D1 の prepare は 1 文ずつしか実行できないため分割する
 function splitStatements(sql: string): string[] {
   return sql
     .split(/--> statement-breakpoint|;\s*$/m)
@@ -42,7 +39,7 @@ async function main(db: D1Database): Promise<number> {
     return 0
   }
 
-  // 実行前に down ファイルがすべて揃っているか確認する
+  // 途中で止まって一部だけ取り消された状態にならないよう、実行前にすべて確認する
   const missing = results.filter(
     ({ name }) => !existsSync(join(DOWN_DIR, name)),
   )
@@ -57,7 +54,7 @@ async function main(db: D1Database): Promise<number> {
     const statements = splitStatements(
       readFileSync(join(DOWN_DIR, name), "utf8"),
     )
-    // down の SQL と記録の削除を 1 トランザクションで実行する
+    // batch はトランザクションで実行されるので、スキーマと d1_migrations の記録がずれない
     await db.batch([
       ...statements.map((s) => db.prepare(s)),
       db.prepare(`DELETE FROM ${MIGRATIONS_TABLE} WHERE name = ?`).bind(name),

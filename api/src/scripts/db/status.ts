@@ -1,6 +1,3 @@
-// マイグレーションの状態を一覧表示する。
-// drizzle/*.sql ごとに、適用済みか (d1_migrations に記録があるか) と down ファイルの有無を出す。
-// 使い方: pnpm db:status
 // 接続先はローカルの D1。wrangler の env は CLOUDFLARE_ENV で切り替わる
 
 import { existsSync, readdirSync } from "node:fs"
@@ -12,8 +9,8 @@ const MIGRATIONS_DIR = join(import.meta.dirname, "../../../drizzle")
 const DOWN_DIR = join(MIGRATIONS_DIR, "down")
 const MIGRATIONS_TABLE = "d1_migrations"
 
-/** d1_migrations の記録を取得する。テーブルが無ければ (未適用なら) 空 */
 async function getApplied(db: D1Database): Promise<Map<string, string>> {
+  // d1_migrations は初回の db:migrate で作られるので、まだ無いことがある
   const table = await db
     .prepare("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?")
     .bind(MIGRATIONS_TABLE)
@@ -38,7 +35,6 @@ async function main(db: D1Database): Promise<number> {
     appliedAt: applied.get(name) ?? "",
     down: existsSync(join(DOWN_DIR, name)) ? "yes" : "MISSING",
   }))
-  // 記録はあるがファイルが無いもの (ファイルを消した・リネームしたなど)
   for (const [name, appliedAt] of applied) {
     if (!files.includes(name)) {
       rows.push({ status: "no file", name, appliedAt, down: "-" })

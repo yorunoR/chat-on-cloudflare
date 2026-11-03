@@ -1,4 +1,4 @@
-// Web Crypto (PBKDF2) でパスワードをハッシュする。Workers と Node の両方でそのまま動く
+// Workers と Node.js (スクリプト) の両方で動かすため、node:crypto ではなく Web Crypto を使う
 
 export const PASSWORD_MIN_LENGTH = 8
 
@@ -43,7 +43,6 @@ async function derive(
   return new Uint8Array(bits)
 }
 
-/** 長さ以外の情報が処理時間に出ないように比較する */
 function timingSafeEqual(a: Uint8Array, b: Uint8Array): boolean {
   if (a.length !== b.length) return false
   let diff = 0
@@ -51,7 +50,6 @@ function timingSafeEqual(a: Uint8Array, b: Uint8Array): boolean {
   return diff === 0
 }
 
-/** `pbkdf2_sha256$<iterations>$<salt>$<hash>` (hex) 形式で返す */
 export async function hashPassword(password: string): Promise<string> {
   const salt = crypto.getRandomValues(new Uint8Array(SALT_BYTES))
   const hash = await derive(password, salt, ITERATIONS)

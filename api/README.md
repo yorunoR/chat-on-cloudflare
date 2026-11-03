@@ -1,21 +1,58 @@
-```txt
-npm install
-npm run dev
+# api
+
+Cloudflare Workers 上で動く [Hono](https://hono.dev/) の API サーバー。
+DB は Cloudflare D1 (SQLite) で、[Drizzle ORM](https://orm.drizzle.team/) を使ってアクセスする。
+`/admin` には [drizzle-admin](https://www.npmjs.com/package/@sson0-er/drizzle-admin) による管理画面がある。
+
+構成の詳細は [docs/01_構成.md](docs/01_構成.md) を参照。
+
+## 起動
+
+### Docker Compose で起動する
+
+リポジトリのルートで実行する。
+
+```sh
+cp .env.api.local.sample .env.api.local   # 初回のみ
+cp api/.dev.vars.example api/.dev.vars    # 初回のみ。ADMIN_SECRET を設定する
+make up                                   # docker compose up
 ```
 
-```txt
-npm run deploy
+`api` コンテナが `pnpm install && pnpm dev` を実行し、http://localhost:8787 で待ち受ける。
+
+### 直接起動する
+
+```sh
+cd api
+cp .dev.vars.example .dev.vars   # 初回のみ。ADMIN_SECRET を設定する
+pnpm install
+pnpm dev                         # http://localhost:8787
 ```
 
-[For generating/synchronizing types based on your Worker configuration run](https://developers.cloudflare.com/workers/wrangler/commands/#types):
+`ADMIN_SECRET` は 32 文字以上のランダムな値にする (例: `openssl rand -base64 48`)。
 
-```txt
-npm run cf-typegen
+### DB と管理者の準備 (初回のみ)
+
+```sh
+pnpm db:migrate                    # ローカル D1 にマイグレーションを適用
+pnpm admin:create you@example.com  # 管理者を作成 (パスワードは対話入力)
 ```
 
-Pass the `CloudflareBindings` as generics when instantiating `Hono`:
+Compose で起動している場合は、`docker compose exec api` を付けて実行する。
 
-```ts
-// src/index.ts
-const app = new Hono<{ Bindings: CloudflareBindings }>()
-```
+起動後の確認:
+
+- http://localhost:8787/health/db — `{ "status": "ok" }` が返れば DB に接続できている
+- http://localhost:8787/admin — 管理画面 (作成した管理者のメールアドレスでログイン)
+
+## 主なコマンド
+
+| コマンド                                        | 内容                                                             |
+| ----------------------------------------------- | ---------------------------------------------------------------- |
+| `pnpm dev`                                      | 開発サーバーを起動                                               |
+| `pnpm lint` / `pnpm lint:fix`                   | Biome によるチェック / 自動修正                                  |
+| `pnpm type`                                     | 型チェック                                                       |
+| `pnpm cf-typegen`                               | `wrangler.jsonc` から型定義 (`worker-configuration.d.ts`) を生成 |
+| `pnpm db:generate`                              | スキーマからマイグレーションを生成                               |
+| `pnpm db:migrate` / `db:rollback` / `db:status` | マイグレーションの適用 / 取り消し / 状態表示                     |
+| `pnpm deploy`                                   | Cloudflare へデプロイ                                            |

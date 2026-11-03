@@ -1,5 +1,3 @@
-// 管理者を作成する。同じメールアドレスが既にあればパスワードを更新し、有効化する。
-// 使い方: pnpm admin:create <email>  (パスワードは実行時に入力)
 // 接続先はローカルの D1。wrangler の env は CLOUDFLARE_ENV で切り替わる
 
 import { createInterface } from "node:readline/promises"
@@ -10,7 +8,6 @@ import { createDB, type Database } from "../../db/client.js"
 import { adminUsers } from "../../db/schema/index.js"
 import type { Bindings } from "../../types.js"
 
-/** 入力内容を画面に表示せずに 1 行読む */
 async function promptHidden(question: string): Promise<string> {
   let muted = false
   const output = new Writable({
