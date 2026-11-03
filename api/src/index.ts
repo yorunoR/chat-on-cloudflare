@@ -1,8 +1,9 @@
 import { sql } from "drizzle-orm"
 import { Hono } from "hono"
 import { createDB } from "./db"
+import type { AppEnv } from "./types"
 
-const app = new Hono()
+const app = new Hono<AppEnv>()
 
 app.get("/health/db", async (c) => {
   const db = createDB(c.env.DB)
