@@ -51,7 +51,8 @@ Compose で起動している場合は、`docker compose exec api` を付けて�
 | ----------------------------------------------- | ---------------------------------------------------------------- |
 | `pnpm dev`                                      | 開発サーバーを起動                                               |
 | `pnpm lint` / `pnpm lint:fix`                   | Biome によるチェック / 自動修正                                  |
-| `pnpm type`                                     | 型チェック                                                       |
+| `pnpm type`                                     | 型チェック (先に `cf-typegen` を実行して型定義を作り直す)        |
+| `pnpm test` / `pnpm test:watch`                 | テストの実行 / 監視実行                                          |
 | `pnpm cf-typegen`                               | `wrangler.jsonc` から型定義 (`worker-configuration.d.ts`) を生成 |
 | `pnpm db:generate`                              | スキーマからマイグレーションを生成                               |
 | `pnpm db:migrate` / `db:rollback` / `db:status` | マイグレーションの適用 / 取り消し / 状態表示                     |
