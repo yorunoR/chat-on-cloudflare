@@ -8,6 +8,8 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "type": "tsc --noEmit && tsc --noEmit -p tsconfig.scripts.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "wrangler d1 migrations apply DB --local",
     "db:rollback": "tsx scripts/db/rollback.ts",
