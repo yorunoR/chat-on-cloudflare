@@ -2,10 +2,10 @@ import { Hono } from "hono"
 import { bodyLimit } from "hono/body-limit"
 import { HTTPException } from "hono/http-exception"
 import { logger } from "hono/logger"
-import { admin } from "./admin"
+import { admin } from "./admin/index.js"
 import { healthRoute } from "./entrypoints/routes/health/index.js"
 import { normalChatRoute } from "./entrypoints/routes/normal_chat/index.js"
-import type { AppEnv } from "./types"
+import type { AppEnv } from "./types.js"
 
 const app = new Hono<AppEnv>()
 
