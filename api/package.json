@@ -23,6 +23,8 @@
     "ws:normal-chat": "tsx scripts/chat_session/normal-chat.ts"
   },
   "dependencies": {
+    "@langchain/core": "^1.3.4",
+    "@langchain/langgraph": "^1.6.0",
     "@sson0-er/drizzle-admin": "0.1.0",
     "drizzle-orm": "^0.45.4",
     "hono": "^4.13.14"
