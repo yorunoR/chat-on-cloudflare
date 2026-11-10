@@ -42,6 +42,7 @@ Compose で起動している場合は、`docker compose exec api` を付けて�
 
 起動後の確認:
 
+- http://localhost:8787/health — `{ "status": "ok" }` が返ればサーバーが応答している
 - http://localhost:8787/health/db — `{ "status": "ok" }` が返れば DB に接続できている
 - http://localhost:8787/admin — 管理画面 (作成した管理者のメールアドレスでログイン)
 
@@ -56,4 +57,5 @@ Compose で起動している場合は、`docker compose exec api` を付けて�
 | `pnpm cf-typegen`                               | `wrangler.jsonc` から型定義 (`worker-configuration.d.ts`) を生成 |
 | `pnpm db:generate`                              | スキーマからマイグレーションを生成                               |
 | `pnpm db:migrate` / `db:rollback` / `db:status` | マイグレーションの適用 / 取り消し / 状態表示                     |
+| `pnpm ws:normal-chat [メッセージ]`              | `/ws/normal_chat` に WebSocket でメッセージを送り、応答を表示    |
 | `pnpm deploy`                                   | Cloudflare へデプロイ                                            |
