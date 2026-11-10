@@ -16,7 +16,8 @@
     "db:status": "tsx scripts/db/status.ts",
     "db:studio": "drizzle-kit studio",
     "db:drop": "drizzle-kit drop",
-    "admin:create": "tsx scripts/admin/create.ts"
+    "admin:create": "tsx scripts/admin/create.ts",
+    "ws:normal-chat": "tsx scripts/chat_session/normal-chat.ts"
   },
   "dependencies": {
     "@sson0-er/drizzle-admin": "0.1.0",
