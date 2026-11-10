@@ -2,7 +2,12 @@ import { env } from "cloudflare:workers"
 import { createAdmin } from "@sson0-er/drizzle-admin"
 import { eq } from "drizzle-orm"
 import { db } from "../db/index.js"
-import { adminUsers } from "../db/schema/index.js"
+import {
+  adminUsers,
+  chatMessages,
+  chatSessions,
+  users,
+} from "../db/schema/index.js"
 import {
   hashPassword,
   PASSWORD_MIN_LENGTH,
@@ -48,4 +53,24 @@ admin.register(adminUsers, {
         ? { ...data, hashedPassword: await hashPassword(data.hashedPassword) }
         : data,
   },
+})
+
+admin.register(users, {
+  listDisplay: ["id", "email", "uid", "createdAt"],
+  searchFields: ["email"],
+  readonlyFields: ["createdAt", "updatedAt"],
+  toString: (row) => row.email,
+})
+
+admin.register(chatSessions, {
+  listDisplay: ["id", "uid"],
+  searchFields: ["uid"],
+  readonlyFields: ["createdAt", "updatedAt"],
+  toString: (row) => row.uid,
+})
+
+admin.register(chatMessages, {
+  listDisplay: ["id", "chatSessionId", "question", "answer"],
+  searchFields: ["question", "answer"],
+  readonlyFields: ["createdAt", "updatedAt"],
 })

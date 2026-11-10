@@ -3,10 +3,10 @@
 import { createInterface } from "node:readline/promises"
 import { Writable } from "node:stream"
 import { getPlatformProxy } from "wrangler"
-import { hashPassword, PASSWORD_MIN_LENGTH } from "../../admin/password.js"
-import { createDB, type Database } from "../../db/client.js"
-import { adminUsers } from "../../db/schema/index.js"
-import type { Bindings } from "../../types.js"
+import { hashPassword, PASSWORD_MIN_LENGTH } from "../../src/admin/password.js"
+import { createDB, type Database } from "../../src/db/client.js"
+import { adminUsers } from "../../src/db/schema/index.js"
+import type { Bindings } from "../../src/types.js"
 
 async function promptHidden(question: string): Promise<string> {
   let muted = false

@@ -1,20 +1,29 @@
 {
   "name": "api",
   "type": "module",
+  "imports": {
+    "#*": {
+      "production": "./dist/*",
+      "default": "./src/*"
+    }
+  },
   "scripts": {
     "dev": "wrangler dev --ip 0.0.0.0",
     "deploy": "wrangler deploy --minify",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "type": "tsc --noEmit && tsc --noEmit -p tsconfig.scripts.json",
+    "type": "pnpm cf-typegen && tsc --noEmit && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p test/tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "wrangler d1 migrations apply DB --local",
-    "db:rollback": "tsx src/scripts/db/rollback.ts",
-    "db:status": "tsx src/scripts/db/status.ts",
+    "db:rollback": "tsx scripts/db/rollback.ts",
+    "db:status": "tsx scripts/db/status.ts",
     "db:studio": "drizzle-kit studio",
     "db:drop": "drizzle-kit drop",
-    "admin:create": "tsx src/scripts/admin/create.ts"
+    "admin:create": "tsx scripts/admin/create.ts",
+    "ws:normal-chat": "tsx scripts/chat_session/normal-chat.ts"
   },
   "dependencies": {
     "@sson0-er/drizzle-admin": "0.1.0",
@@ -23,10 +32,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.3",
+    "@cloudflare/vitest-plugin": "^1.4.9",
     "@types/node": "^26.6.5",
     "drizzle-kit": "^0.31.11",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
+    "vitest": "^5.0.5",
     "wrangler": "^4.110.0"
   }
 }
