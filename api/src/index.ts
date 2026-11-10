@@ -4,6 +4,7 @@ import { HTTPException } from "hono/http-exception"
 import { logger } from "hono/logger"
 import { admin } from "./admin"
 import { healthRoute } from "./entrypoints/routes/health/index.js"
+import { normalChatRoute } from "./entrypoints/routes/normal_chat/index.js"
 import type { AppEnv } from "./types"
 
 const app = new Hono<AppEnv>()
@@ -25,6 +26,7 @@ app.route("/admin", admin.app)
 // 機能の接頭辞はここで付け、機能内のルートは routes/<機能>/index.ts でまとめる
 const routes = app
   .route("/health", healthRoute)
+  .route("/ws/normal_chat", normalChatRoute)
 
 export type AppType = typeof routes
 export default app
