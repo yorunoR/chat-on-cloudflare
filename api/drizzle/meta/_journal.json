@@ -15,6 +15,13 @@
       "when": 1794286720790,
       "tag": "0001_create_users",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1794288202892,
+      "tag": "0002_create_chat_sessions",
+      "breakpoints": true
     }
   ]
 }
