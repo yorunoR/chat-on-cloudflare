@@ -3,6 +3,8 @@
   "name": "api",
   "main": "src/index.ts",
   "compatibility_date": "2026-10-25",
+  // Workers ではファイルを読めないため、YAML は中身を文字列としてバンドルする
+  "rules": [{ "type": "Text", "globs": ["**/*.yaml"], "fallthrough": true }],
   // "compatibility_flags": [
   //   "nodejs_compat"
   // ],
