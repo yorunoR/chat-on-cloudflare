@@ -4,6 +4,8 @@ export type Bindings = {
   ADMIN_SECRET: string
   // "true" のとき、使ったプロンプトテンプレートを prompt_templates に保存する (ローカル開発用)
   SAVE_PROMPT_TEMPLATE?: string
+  // LLM (OpenAI) の API キー
+  OPENAI_API_KEY: string
 }
 
 export type AppEnv = {
