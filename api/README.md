@@ -48,15 +48,15 @@ Compose で起動している場合は、`docker compose exec api` を付けて�
 
 ## 主なコマンド
 
-| コマンド                                               | 内容                                                             |
-| ------------------------------------------------------ | ---------------------------------------------------------------- |
-| `pnpm dev`                                             | 開発サーバーを起動                                               |
-| `pnpm lint` / `pnpm lint:fix`                          | Biome によるチェック / 自動修正                                  |
-| `pnpm type`                                            | 型チェック (先に `cf-typegen` を実行して型定義を作り直す)        |
-| `pnpm test` / `pnpm test:watch`                        | テストの実行 / 監視実行                                          |
-| `pnpm cf-typegen`                                      | `wrangler.jsonc` から型定義 (`worker-configuration.d.ts`) を生成 |
-| `pnpm db:generate`                                     | スキーマからマイグレーションを生成                               |
-| `pnpm db:migrate` / `db:rollback` / `db:status`        | マイグレーションの適用 / 取り消し / 状態表示                     |
-| `pnpm session:create <email> <label> [initialMessage]` | 既存ユーザーに ChatSession を作成                                |
-| `pnpm ws:normal-chat [メッセージ]`                     | `/ws/normal_chat` に WebSocket でメッセージを送り、応答を表示    |
-| `pnpm deploy`                                          | Cloudflare へデプロイ                                            |
+| コマンド                                               | 内容                                                                       |
+| ------------------------------------------------------ | -------------------------------------------------------------------------- |
+| `pnpm dev`                                             | 開発サーバーを起動                                                         |
+| `pnpm lint` / `pnpm lint:fix`                          | Biome によるチェック / 自動修正                                            |
+| `pnpm type`                                            | 型チェック (先に `cf-typegen` を実行して型定義を作り直す)                  |
+| `pnpm test` / `pnpm test:watch`                        | テストの実行 / 監視実行                                                    |
+| `pnpm cf-typegen`                                      | `wrangler.jsonc` から型定義 (`worker-configuration.d.ts`) を生成           |
+| `pnpm db:generate`                                     | スキーマからマイグレーションを生成                                         |
+| `pnpm db:migrate` / `db:rollback` / `db:status`        | マイグレーションの適用 / 取り消し / 状態表示                               |
+| `pnpm session:create <email> <label> [initialMessage]` | 既存ユーザーに ChatSession を作成                                          |
+| `pnpm session:normal-chat <sessionUid> [メッセージ]`   | `/ws/normal_chat/<sessionUid>` に WebSocket でメッセージを送り、応答を表示 |
+| `pnpm deploy`                                          | Cloudflare へデプロイ                                                      |
