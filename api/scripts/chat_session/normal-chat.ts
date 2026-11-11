@@ -1,13 +1,19 @@
-// /ws/normal_chat にメッセージを 1 回送り、返ってきたエコーを表示する。
+// /ws/normal_chat/<sessionUid> にメッセージを 1 回送り、返ってきたエコーを表示する。
 // サーバーは 1 回の送信に 3 回エコーを返すので、3 件受け取ったら切断する。
-// 使い方: pnpm ws:normal-chat [メッセージ]
-// 接続先は WS_URL で変更できる (既定: ws://localhost:8787/ws/normal_chat)
+// 使い方: pnpm session:normal-chat <sessionUid> [メッセージ]
+// 接続先の基点は WS_URL で変更できる (既定: ws://localhost:8787/ws/normal_chat)
 
 const EXPECTED_COUNT = 3
 const TIMEOUT_MS = 5000
 
-const url = process.env.WS_URL ?? "ws://localhost:8787/ws/normal_chat"
-const message = process.argv[2] ?? "hello"
+const [sessionUid, message = "hello"] = process.argv.slice(2)
+if (!sessionUid) {
+  console.error("Usage: pnpm session:normal-chat <sessionUid> [message]")
+  process.exit(1)
+}
+
+const baseUrl = process.env.WS_URL ?? "ws://localhost:8787/ws/normal_chat"
+const url = `${baseUrl}/${encodeURIComponent(sessionUid)}`
 
 const ws = new WebSocket(url)
 let received = 0
