@@ -1,27 +1,25 @@
+import { zValidator } from "@hono/zod-validator"
 import { Hono } from "hono"
-import { validator } from "hono/validator"
+import { z } from "zod"
 import { db } from "#db/index.js"
 import { chatSessions } from "#db/schema/index.js"
 import { requireUser } from "#entrypoints/middlewares/require-user.js"
+
+const postChatSessionSchema = z.object({
+  uid: z.string().min(1).max(128),
+  label: z.string().min(1).max(256),
+  initialMessage: z
+    .string()
+    .nullish()
+    .transform((v) => v ?? null),
+})
 
 // uid はクライアントが採番する。既に使われていれば 409 を返す
 export const postChatSession = new Hono().post(
   "/",
   requireUser,
-  validator("json", (value, c) => {
-    const { uid, label, initialMessage } = value
-    if (
-      typeof uid !== "string" ||
-      uid.length === 0 ||
-      uid.length > 128 ||
-      typeof label !== "string" ||
-      label.length === 0 ||
-      label.length > 256 ||
-      (initialMessage != null && typeof initialMessage !== "string")
-    ) {
-      return c.json({ error: "Bad Request" }, 400)
-    }
-    return { uid, label, initialMessage: initialMessage ?? null }
+  zValidator("json", postChatSessionSchema, (result, c) => {
+    if (!result.success) return c.json({ error: "Bad Request" }, 400)
   }),
   async (c) => {
     const user = c.var.user
