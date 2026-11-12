@@ -6,16 +6,13 @@ import {
 } from "#apps/normal_chat/nodes/normal-node.js"
 import promptTemplatesYaml from "#apps/normal_chat/prompt_templates.yaml"
 import type { ChatSession } from "#db/schema/index.js"
-import {
-  getPromptTemplate,
-  setStore,
-} from "#libs/prompts/prompt-template-store.js"
+import { createPromptTemplateStore } from "#libs/prompts/prompt-template-store.js"
 import { appendQaToSession } from "#libs/queries/chat-sessions.js"
 import type { WsSender } from "#libs/websocket/sender.js"
 
 const FLOW_NAME = "normal_chat_flow"
 
-setStore(promptTemplatesYaml)
+const promptTemplates = createPromptTemplateStore(promptTemplatesYaml)
 
 const Node = {
   normal: "normal_node",
@@ -58,7 +55,7 @@ export class NormalChatFlow {
   }
 
   static async create(options: NormalChatFlowOptions): Promise<NormalChatFlow> {
-    const normalAgentPromptTemplate = await getPromptTemplate(
+    const normalAgentPromptTemplate = await promptTemplates.get(
       FLOW_NAME,
       Node.normal,
       "normal_agent",
