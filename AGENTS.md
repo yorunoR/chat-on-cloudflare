@@ -31,6 +31,7 @@
 
 - テーブルは `src/db/schema/` に 1 ファイル 1 テーブルで定義し、`src/db/schema/index.ts` から export する。
 - `created_at` / `updated_at` は `columns/timestamps.ts` の `timestamps` をスプレッドして付ける。
+- 単純なクエリはルートなどの呼び出し側で `db` に直接書く。複雑なクエリや複数箇所で使うクエリだけ `src/libs/queries/` に置く。repository 層は作らない。
 - マイグレーション (`pnpm db:generate` と `drizzle/down/` の SQL) は依頼されたときだけ作る。スキーマを変更しても自分からは生成しない。
 - マイグレーションを作るときは、同名の down SQL を `drizzle/down/` に手書きで用意する (`pnpm db:rollback` が使う)。`drizzle/` 配下の生成物 (`*.sql`, `meta/`) は手で編集しない。
 
