@@ -5,7 +5,8 @@
     "#*": "./src/*"
   },
   "scripts": {
-    "dev": "wrangler dev --ip 0.0.0.0",
+    "dev": "concurrently -k \"npm:dev:server\" \"npm:watch:types\"",
+    "dev:server": "wrangler dev --ip 0.0.0.0",
     "deploy": "wrangler deploy --minify",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
     "lint": "biome check .",
@@ -21,7 +22,9 @@
     "db:drop": "drizzle-kit drop",
     "admin:create": "tsx scripts/admin/create.ts",
     "session:create": "tsx scripts/chat_session/create.ts",
-    "session:normal-chat": "tsx scripts/chat_session/normal-chat.ts"
+    "session:normal-chat": "tsx src/scripts/chat_session/normal-chat.ts",
+    "build:types": "tsc -p tsconfig.rpc.json",
+    "watch:types": "tsc -p tsconfig.rpc.json --watch"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.9.1",
