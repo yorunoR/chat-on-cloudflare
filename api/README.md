@@ -19,6 +19,7 @@ make up                                   # docker compose up
 ```
 
 `api` コンテナが `pnpm install && pnpm dev` を実行し、http://localhost:8787 で待ち受ける。
+`pnpm dev` は RPC 用の型定義 (`rpc-types/`) の監視出力も同時に起動する ([docs/05_開発.md](docs/05_開発.md))。
 
 ### 直接起動する
 
@@ -51,11 +52,12 @@ Compose で起動している場合は、`docker compose exec api` を付けて�
 
 | コマンド                                               | 内容                                                                       |
 | ------------------------------------------------------ | -------------------------------------------------------------------------- |
-| `pnpm dev`                                             | 開発サーバーを起動                                                         |
+| `pnpm dev`                                             | 開発サーバーを起動 (RPC 用の型の監視出力も同時に動く)                      |
 | `pnpm lint` / `pnpm lint:fix`                          | Biome によるチェック / 自動修正                                            |
 | `pnpm type`                                            | 型チェック (先に `cf-typegen` を実行して型定義を作り直す)                  |
 | `pnpm test` / `pnpm test:watch`                        | テストの実行 / 監視実行                                                    |
 | `pnpm cf-typegen`                                      | `wrangler.jsonc` から型定義 (`worker-configuration.d.ts`) を生成           |
+| `pnpm build:types` / `pnpm watch:types`                | RPC 用の型定義を `rpc-types/` に出力 / 監視して出力                        |
 | `pnpm db:generate`                                     | スキーマからマイグレーションを生成                                         |
 | `pnpm db:migrate` / `db:rollback` / `db:status`        | マイグレーションの適用 / 取り消し / 状態表示                               |
 | `pnpm session:create <email> <label> [initialMessage]` | 既存ユーザーに ChatSession を作成                                          |
