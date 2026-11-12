@@ -4,7 +4,7 @@ import {
   text,
   uniqueIndex,
 } from "drizzle-orm/sqlite-core"
-import { timestamps } from "./columns/timestamps.js"
+import { timestamps } from "#db/schema/columns/timestamps.js"
 
 export const adminUsers = sqliteTable(
   "admin_users",

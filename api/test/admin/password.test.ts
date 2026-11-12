@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { hashPassword, verifyPassword } from "../../src/admin/password.js"
+import { hashPassword, verifyPassword } from "#admin/password.js"
 
 describe("hashPassword / verifyPassword", () => {
   it("同じパスワードなら検証に成功する", async () => {

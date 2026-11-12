@@ -1,0 +1,6 @@
+normal_chat_flow:
+  normal_node:
+    normal_agent:
+      model_name: gpt-6-luna
+      system_message: "ユーザーと楽しくおしゃべりしてください。"
+      label: "日常会話担当"

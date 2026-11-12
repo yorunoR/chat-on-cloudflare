@@ -3,3 +3,9 @@
 # 管理画面 (/admin) の Cookie 署名用。ランダムな値 (32 文字以上) にする
 # 生成例: openssl rand -base64 48
 ADMIN_SECRET=
+
+# true にすると、使ったプロンプトテンプレートを prompt_templates テーブルに保存する (ローカル開発用。本番では有効にしない)
+# SAVE_PROMPT_TEMPLATE=false
+
+# LLM (OpenAI) の API キー
+OPENAI_API_KEY=

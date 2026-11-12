@@ -1,8 +1,8 @@
 import { relations } from "drizzle-orm"
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
-import { chatSessions } from "./chat-sessions.js"
-import { timestamps } from "./columns/timestamps.js"
-import { users } from "./users.js"
+import { chatSessions } from "#db/schema/chat-sessions.js"
+import { timestamps } from "#db/schema/columns/timestamps.js"
+import { users } from "#db/schema/users.js"
 
 export const chatMessages = sqliteTable("chat_messages", {
   id: integer("id").primaryKey({ autoIncrement: true }),
