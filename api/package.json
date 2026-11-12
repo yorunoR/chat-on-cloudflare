@@ -38,6 +38,7 @@
     "@biomejs/biome": "2.6.3",
     "@cloudflare/vitest-plugin": "^1.4.9",
     "@types/node": "^26.6.5",
+    "concurrently": "^10.0.6",
     "drizzle-kit": "^0.31.11",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
