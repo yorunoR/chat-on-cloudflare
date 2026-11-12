@@ -36,5 +36,31 @@ services:
     tty: true
     stdin_open: true
 
+  web:
+    <<: *app
+    build:
+      context: .
+      dockerfile: containers/web/local/Dockerfile
+    working_dir: /web
+    # api/ は RPC の型 (api/rpc-types/) を参照するためだけに読み取り専用で含める。
+    # web/ と api/ をリポジトリと同じ並びにして、web/ からの相対パスで型を import できるようにする
+    volumes:
+      - ./web:/web
+      - ./api:/api:ro
+    environment:
+      # コンテナはホストの UID で動き、passwd にユーザーがないため、HOME を明示する (pnpm のストア用)
+      HOME: /web
+      # 開発サーバーが /api と /ws を中継する先
+      API_URL: http://api:8787
+    command: /bin/bash -c "
+      pnpm install;
+      pnpm dev"
+    ports:
+      - "5173:5173"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - api
+
 networks:
   network:

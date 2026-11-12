@@ -3,6 +3,7 @@
 ## リポジトリ
 
 - `api/`: Hono + Drizzle ORM + Cloudflare D1 の API サーバー (Cloudflare Workers)。構成は `api/docs/01_構成.md` から読む。
+- `web/`: Vue + Vite のフロントエンド。`api/` の `AppType` を `hono/client` の `hc` に渡して API を呼ぶ。構成は `web/README.md` を読む。
 - `containers/`, `compose.yaml`, `Makefile`: 開発環境。
 
 ## 作業環境
@@ -10,6 +11,7 @@
 - AI エージェントは `ai` コンテナ内で動き、`CLOUDFLARE_ENV=ai` が設定されている。wrangler やスクリプトの接続先はローカル D1 の `api_ai` で、人間用の `api_dev` には触れない。`CLOUDFLARE_ENV` を外したり上書きしたりしない。
 - リモート (本番) の D1 に対する操作 (`--remote`)、`pnpm deploy`、`wrangler secret` は依頼されたときだけ行う。
 - `api/` を変更したら `api/` で `pnpm lint` と `pnpm type` を通す。
+- `web/` を変更したら `web/` で `pnpm lint` と `pnpm type` を通す。`pnpm type` は `api/rpc-types/` を参照するので、未生成なら `api/` で `pnpm build:types` を先に実行する。
 
 ## api/ の編集ルール
 
@@ -53,6 +55,8 @@
 ## ドキュメント
 
 - `api/` を変更したら `api/docs/` を確認し、必要なら同じ変更内で更新する。起動手順が変わったら `api/README.md` も更新する。
+- `web/` を変更したら `web/README.md` を確認し、必要なら同じ変更内で更新する。
+- `api/` のルートや WebSocket のメッセージ形式を変えたら、`web/` の呼び出し側と `web/README.md` への影響も確認する。
 - `api/docs/` のファイル名は `01_構成.md` のように、読む順番の 2 桁番号 + `_` + 日本語名にする。
 
 ## コミット

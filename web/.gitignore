@@ -1,0 +1,13 @@
+# deps
+node_modules/
+
+# build
+dist/
+
+# misc
+.DS_Store
+
+# local
+/.local/
+/.cache/
+/.npm/
