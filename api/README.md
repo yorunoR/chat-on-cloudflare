@@ -14,7 +14,7 @@ DB は Cloudflare D1 (SQLite) で、[Drizzle ORM](https://orm.drizzle.team/) を
 
 ```sh
 cp .env.api.local.sample .env.api.local   # 初回のみ
-cp api/.dev.vars.example api/.dev.vars    # 初回のみ。ADMIN_SECRET を設定する
+cp api/.dev.vars.example api/.dev.vars    # 初回のみ。ADMIN_SECRET と OPENAI_API_KEY を設定する
 make up                                   # docker compose up
 ```
 
@@ -24,12 +24,13 @@ make up                                   # docker compose up
 
 ```sh
 cd api
-cp .dev.vars.example .dev.vars   # 初回のみ。ADMIN_SECRET を設定する
+cp .dev.vars.example .dev.vars   # 初回のみ。ADMIN_SECRET と OPENAI_API_KEY を設定する
 pnpm install
 pnpm dev                         # http://localhost:8787
 ```
 
 `ADMIN_SECRET` は 32 文字以上のランダムな値にする (例: `openssl rand -base64 48`)。
+`OPENAI_API_KEY` はチャット (`/ws/normal_chat`) の回答生成に使う。未設定でもサーバーは起動するが、チャットは失敗する。
 
 ### DB と管理者の準備 (初回のみ)
 
