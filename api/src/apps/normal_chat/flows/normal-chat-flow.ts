@@ -11,6 +11,7 @@ import {
 import { appendQaToSession } from "#libs/queries/chat-sessions.js"
 import type { WsSender } from "#libs/websocket/sender.js"
 import promptTemplatesYaml from "../prompt_templates.yaml"
+import type { FlowData } from "./flow-data.js"
 
 const FLOW_NAME = "normal_chat_flow"
 
@@ -27,12 +28,6 @@ const State = Annotation.Root({
     default: () => [],
   }),
 })
-
-export type FlowData = {
-  prompt: string
-  content: string
-  lastAgentLabel: string
-}
 
 export type NormalChatFlowOptions = {
   /** null を渡すと、クライアントへ送らずに回答だけを返す */

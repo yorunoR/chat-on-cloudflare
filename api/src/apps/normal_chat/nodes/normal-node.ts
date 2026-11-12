@@ -1,4 +1,4 @@
-import type { FlowData } from "#apps/normal_chat/flows/normal-chat-flow.js"
+import type { FlowData } from "#apps/normal_chat/flows/flow-data.js"
 import type { ChatSession } from "#db/schema/index.js"
 import { LLMAgent } from "#libs/agents/llm-agent.js"
 import { getHistory } from "#libs/queries/chat-sessions.js"

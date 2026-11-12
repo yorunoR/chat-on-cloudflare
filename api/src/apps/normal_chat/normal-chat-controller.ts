@@ -1,7 +1,8 @@
 import type { ChatSession } from "#db/schema/index.js"
 import { runInBackground } from "#libs/tasks/background-task.js"
 import { sendDone, type WsSender } from "#libs/websocket/sender.js"
-import { type FlowData, NormalChatFlow } from "./flows/normal-chat-flow.js"
+import type { FlowData } from "./flows/flow-data.js"
+import { NormalChatFlow } from "./flows/normal-chat-flow.js"
 
 /** 回答はノードが ws に送る。ws が null のときは送らずに回答だけを返す */
 export async function runNormalChat(
