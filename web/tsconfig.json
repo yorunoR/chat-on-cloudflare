@@ -13,7 +13,10 @@
       // api/rpc-types の型が import する hono を web/ の hono に解決させる。
       // api/node_modules の有無に左右されず、hc と AppType が同じ hono の型を使うようにするため
       "hono": ["./node_modules/hono"],
-      "hono/*": ["./node_modules/hono/dist/types/*"]
+      "hono/*": ["./node_modules/hono/dist/types/*"],
+      // api/package.json の imports では #* が api/src/ のソースに解決され、web/ にない Workers の型
+      // (D1Database など) を要求される。.d.ts に向けて skipLibCheck の対象にするため
+      "#*": ["../api/rpc-types/*"]
     }
   },
   "include": ["src", "vite.config.ts"]
