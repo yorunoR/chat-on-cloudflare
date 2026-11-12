@@ -1,7 +1,7 @@
 import {
   OpenAIClient,
   type OpenAIClientOptions,
-} from "./models/openai-client.js"
+} from "#libs/external/llm/models/openai-client.js"
 
 export type LLMClientOptions = OpenAIClientOptions
 

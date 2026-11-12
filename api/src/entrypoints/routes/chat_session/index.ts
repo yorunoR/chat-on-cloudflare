@@ -1,4 +1,4 @@
 import { Hono } from "hono"
-import { postChatSession } from "./post-chat-session.js"
+import { postChatSession } from "#entrypoints/routes/chat_session/post-chat-session.js"
 
 export const chatSessionRoute = new Hono().route("/", postChatSession)

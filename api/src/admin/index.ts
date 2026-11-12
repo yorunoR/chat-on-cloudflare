@@ -1,18 +1,18 @@
 import { env } from "cloudflare:workers"
 import { createAdmin } from "@sson0-er/drizzle-admin"
 import { eq } from "drizzle-orm"
-import { db } from "../db/index.js"
+import {
+  hashPassword,
+  PASSWORD_MIN_LENGTH,
+  verifyPassword,
+} from "#admin/password.js"
+import { db } from "#db/index.js"
 import {
   adminUsers,
   chatMessages,
   chatSessions,
   users,
-} from "../db/schema/index.js"
-import {
-  hashPassword,
-  PASSWORD_MIN_LENGTH,
-  verifyPassword,
-} from "./password.js"
+} from "#db/schema/index.js"
 
 export const admin = createAdmin({
   db,

@@ -1,4 +1,4 @@
-import type { WsSender } from "./sender.js"
+import type { WsSender } from "#libs/websocket/sender.js"
 
 /** libs/ から Hono を import しないよう、使うメソッドだけを型にする */
 export type WsConnection = WsSender & {

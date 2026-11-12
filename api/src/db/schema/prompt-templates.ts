@@ -1,5 +1,5 @@
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
-import { timestamps } from "./columns/timestamps.js"
+import { timestamps } from "#db/schema/columns/timestamps.js"
 
 export const promptTemplates = sqliteTable("prompt_templates", {
   id: integer("id").primaryKey({ autoIncrement: true }),

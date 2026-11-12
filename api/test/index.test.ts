@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import app from "../src/index.js"
+import app from "#index.js"
 
 describe("GET /health/db", () => {
   it("D1 に接続できれば ok を返す", async () => {

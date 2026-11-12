@@ -3,7 +3,7 @@
 import { existsSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 import { getPlatformProxy } from "wrangler"
-import type { Bindings } from "../../src/types.js"
+import type { Bindings } from "#types.js"
 
 const DOWN_DIR = join(import.meta.dirname, "../../drizzle/down")
 const MIGRATIONS_TABLE = "d1_migrations"

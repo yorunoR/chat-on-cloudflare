@@ -1,8 +1,10 @@
 import { Annotation, END, START, StateGraph } from "@langchain/langgraph"
+import type { FlowData } from "#apps/normal_chat/flows/flow-data.js"
 import {
   type AgentTemplate,
   NormalNode,
 } from "#apps/normal_chat/nodes/normal-node.js"
+import promptTemplatesYaml from "#apps/normal_chat/prompt_templates.yaml"
 import type { ChatSession } from "#db/schema/index.js"
 import {
   getPromptTemplate,
@@ -10,8 +12,6 @@ import {
 } from "#libs/prompts/prompt-template-store.js"
 import { appendQaToSession } from "#libs/queries/chat-sessions.js"
 import type { WsSender } from "#libs/websocket/sender.js"
-import promptTemplatesYaml from "../prompt_templates.yaml"
-import type { FlowData } from "./flow-data.js"
 
 const FLOW_NAME = "normal_chat_flow"
 
