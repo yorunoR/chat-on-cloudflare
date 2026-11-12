@@ -21,6 +21,7 @@ app.onError((err, c) => {
 
 // drizzle-admin はリクエストボディのサイズを制限しないため前段で制限する
 app.use("/admin/*", bodyLimit({ maxSize: 1024 * 1024 }))
+// 管理画面は hc から呼ばないので、AppType に含めないようチェーンの外でつなぐ
 app.route("/admin", admin.app)
 
 // RPC クライアント (hc) が型を拾えるよう、ルートはチェーンでつないで AppType として export する。

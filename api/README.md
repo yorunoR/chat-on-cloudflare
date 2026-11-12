@@ -4,7 +4,7 @@ Cloudflare Workers 上で動く [Hono](https://hono.dev/) の API サーバー�
 DB は Cloudflare D1 (SQLite) で、[Drizzle ORM](https://orm.drizzle.team/) を使ってアクセスする。
 `/admin` には [drizzle-admin](https://www.npmjs.com/package/@sson0-er/drizzle-admin) による管理画面がある。
 
-構成の詳細は [docs/01_構成.md](docs/01_構成.md) を参照。
+構成の詳細は [docs/01_構成.md](docs/01_構成.md) から読む (チャット・DB・管理画面・開発の各ドキュメントへの一覧もここにある)。
 
 ## 起動
 

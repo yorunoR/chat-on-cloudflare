@@ -19,7 +19,7 @@
 - `scripts/` は Node.js (tsx) で動く運用スクリプト。D1 には `wrangler` の `getPlatformProxy()` で接続し、`createDB(env.DB)` でクライアントを作る。
 - Workers とスクリプトの両方から使うモジュール (`src/db/client.ts`, `src/db/schema/`, `src/admin/password.ts` など) では `node:*` も `cloudflare:workers` も import しない。`cloudflare:workers` を使ってよいのは Workers 専用のモジュール (`src/db/index.ts`, `src/admin/index.ts` など) だけ。
 - import パスには `.js` 拡張子を付ける (tsx で実行するスクリプトと共有するため)。
-- `src/` 配下のモジュールは `package.json` の `imports` により `#db/index.js` のように `src/` 基準のパスで import できる。`../../../` のように階層をさかのぼる相対パスを書かずにこちらを使う。
+- `src/` 配下のモジュールは `package.json` の `imports` により `#db/index.js` のように `src/` 基準のパスで import できる。同じディレクトリ内も含め、`./` や `../` の相対パスは書かずにこちらを使う。
 
 ### バインディング・環境変数
 
